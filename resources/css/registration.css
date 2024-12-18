@@ -1,0 +1,58 @@
+body {
+    background-color: #f7f9fc;
+}
+.vh-100 {
+    min-height: 100vh;
+}
+.h-custom {
+    height: 100%;
+}
+.form-label {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+.btn-lg {
+    font-size: 1.2rem;
+    padding: 0.75rem 2rem;
+}
+.small {
+    font-size: 0.875rem;
+}
+.link-danger {
+    color: #dc3545 !important;
+}
+.link-danger:hover {
+    color: #c82333 !important;
+}
+.dropdown-menu {
+    max-width: 220px;
+}
+.dropdown-item {
+    font-size: 1.1rem;
+}
+.error-message {
+    color: red;
+    display: none;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper .form-control {
+    padding-right: 40px; /* Space for the button */
+}
+
+.password-wrapper .btn {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.password-wrapper .btn i {
+    font-size: 1.2rem;
+}
