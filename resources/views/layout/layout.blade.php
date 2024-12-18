@@ -41,6 +41,7 @@
         <!-- Sidebar -->
         <nav id="sidebar" class="sidebar">
             <div class="p-3">
+                <h5 class="fw-bold">Admin</h5>
                 <div class="accordion" id="accordionExample">
                     {{-- Dashboard --}}
                     <div class="accordion-item">
