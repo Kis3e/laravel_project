@@ -42,7 +42,7 @@
         <!-- Sidebar -->
         <nav id="sidebar" class="sidebar">
             <div class="p-3">
-                <h5 class="fw-bold">User</h5>
+           
 
                 <ul class="list-unstyled">
                     <!-- View Equipment -->
