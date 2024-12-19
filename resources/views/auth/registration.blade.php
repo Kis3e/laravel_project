@@ -18,8 +18,8 @@
         <div class="container-fluid h-custom">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-md-9 col-lg-6 col-xl-5">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                        class="img-fluid rounded-3 shadow-lg" alt="Sample image" />
+                    <img src="{{ asset('images/logo.png') }}"
+                        class="img-fluid rounded-3 logo" alt="Sample image" />
                 </div>
                 <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
                     <form action="{{ route('registration.post') }}" method="post">
@@ -57,7 +57,7 @@
                                 <input type="password" id="password" name="password" autocomplete="off"
                                     class="form-control form-control-lg" placeholder="Enter a password" required />
                                 <button type="button" class="btn btn-outline-dark" id="togglePassword">
-                                    <i class="bi bi-eye-slash" id="eyeIcon"></i> <!-- Default eye-slash icon -->
+                                    <i class="bi bi-eye-slash" id="eyeIcon"></i>
                                 </button>
                             </div>
                         </div>

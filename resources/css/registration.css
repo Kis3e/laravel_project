@@ -49,10 +49,15 @@ body {
     right: 10px;
     transform: translateY(-50%);
     border: none;
-    background: transparent;
+    /* background: transparent; */
     cursor: pointer;
 }
 
 .password-wrapper .btn i {
     font-size: 1.2rem;
+}
+
+.logo {
+    width: 700px;
+    height: auto;
 }

@@ -31,8 +31,7 @@ body {
     font-size: 1.1rem;
 }
 
-/* In login.css */
 .logo {
-    width: 700px; /* Set the desired width */
-    height: auto; /* Maintain aspect ratio */
+    width: 700px;
+    height: auto;
 }
