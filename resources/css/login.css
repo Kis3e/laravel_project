@@ -1,5 +1,5 @@
 body {
-    background-color: #f7f9fc;
+    background-color: #f4f4f4;
 }
 .vh-100 {
     min-height: 100vh;
@@ -29,4 +29,10 @@ body {
 }
 .dropdown-item {
     font-size: 1.1rem;
+}
+
+/* In login.css */
+.logo {
+    width: 700px; /* Set the desired width */
+    height: auto; /* Maintain aspect ratio */
 }
