@@ -57,7 +57,7 @@
                                 <form action="{{ route('equipment.delete', ['equipment' => $equipment]) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this Equipment?')">
                                         <i class="bi bi-trash-fill"></i> Delete
                                     </button>
                                 </form>

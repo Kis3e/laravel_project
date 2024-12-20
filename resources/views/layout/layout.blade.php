@@ -9,9 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     @vite('resources/css/dashboard.css')
     @vite('resources/css/adminlayout.css')
-    <style>
-
-    </style>
 </head>
 
 <body>
@@ -19,6 +16,9 @@
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <div class="container-fluid">
+            <button id="toggleSidebar" class="btn btn-light me-2">
+                <i class="bi bi-list"></i>
+            </button>
             <a class="navbar-brand fw-bold" href="#">{{ config('app.name') }}</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
@@ -43,7 +43,7 @@
             <div class="p-3">
                 <h5 class="fw-bold">Admin</h5>
                 <div class="accordion" id="accordionExample">
-                    {{-- Dashboard --}}
+                    <!-- Dashboard -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="dashboard">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -149,7 +149,7 @@
         </nav>
 
         <!-- Content Area -->
-        <div id="content">
+        <div id="content" class="flex-fill">
             @yield('content')
         </div>
     </div>
@@ -158,15 +158,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    var navLinks = document.querySelectorAll('.accordion-body .nav-link');
+            const sidebar = document.getElementById('sidebar');
+            const toggleSidebar = document.getElementById('toggleSidebar');
+            const mainContent = document.querySelector('.main-content');
 
-    navLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            event.stopPropagation(); // Prevent the click event from propagating to the accordion button
+            toggleSidebar.addEventListener('click', function() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('sidebar-collapsed');
+            });
         });
-    });
-});
-
     </script>
 </body>
 

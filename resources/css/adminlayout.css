@@ -1,70 +1,97 @@
-body {
-    font-family: Arial, sans-serif;
-}
-.navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+/* Sidebar Styling */
 .sidebar {
-    height: 100vh;
+    position: fixed;
+    top: 56px; /* Adjust this value to match the height of the navbar */
+    left: 0;
+    height: calc(100% - 56px); /* Ensure the sidebar takes up the remaining space below the navbar */
+    width: 250px;
+    background-color: #f8f9fa;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    z-index: 100; /* Sidebar is below the navbar */
+}
+
+.sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+/* Content area */
+.main-content {
+    display: flex;
+    margin-left: 250px;
+    transition: margin-left 0.3s ease-in-out;
+    padding-top: 56px; /* Ensure content doesn't get hidden under the navbar */
+}
+
+/* Adjust content margin when sidebar is collapsed */
+.main-content.sidebar-collapsed {
+    margin-left: 0;
+}
+
+/* Navbar */
+nav.navbar {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
-    background-color: #f8f9fa;
-    padding-top: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-}
-.sidebar .accordion-item {
-    border: none;
-    border-radius: 0;
-}
-.sidebar .accordion-button {
-    background-color: #f8f9fa;
-    color: #333;
-    font-weight: bold;
-}
-.sidebar .accordion-button:focus {
-    box-shadow: none;
-}
-.sidebar .accordion-body {
-    background-color: #e9ecef;
-    padding-left: 20px;
-}
-.sidebar .nav-link {
-    color: #333;
-    text-decoration: none;
-    padding: 8px 0;
-}
-.sidebar .nav-link:hover {
-    color: #007bff;
-    text-decoration: underline;
+    width: 100%;
+    z-index: 1050; /* Ensure navbar is above the sidebar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow below the navbar */
 }
 
-/* Hover effects for sub-items */
-.sidebar .accordion-body .nav-link {
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
+/* Adjustments for mobile and smaller devices */
+@media (max-width: 991px) {
+    /* Ensure sidebar and content adjust appropriately on small screens */
+    #sidebar.collapsed {
+        display: none;
+    }
+
+    .main-content.sidebar-collapsed {
+        margin-left: 0;
+    }
+
+    /* Ensure navbar items don't stack on each other on small devices */
+    .navbar-nav {
+        flex-direction: row; /* Align items horizontally */
+        align-items: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin-left: 10px; /* Space between nav items */
+    }
+
+    /* Ensure the navbar items (app name, buttons) stay aligned on small screens */
+    .navbar-toggler {
+        margin-left: auto; /* Push logout button to the right */
+    }
+
+    /* Ensure the logout button doesn’t stack with the other navbar items */
+    .navbar-toggler, .navbar-nav .nav-item {
+        display: inline-block; /* Make sure they're in-line */
+    }
+
+    /* Adjust for screens smaller than 576px (iPhone SE and similar devices) */
+    @media (max-width: 575px) { /* Target smaller screens like iPhone SE */
+        .navbar-nav {
+            flex-direction: row; /* Align items horizontally */
+            justify-content: space-between; /* Spread out the items */
+        }
+
+        .navbar-nav .nav-item {
+            margin: 0 5px; /* Reduce margin for tighter layout */
+        }
+
+        .navbar-toggler {
+            order: 2; /* Ensure the toggle button is on the right */
+        }
+
+        /* Ensure the navbar items stay aligned without stacking */
+        .navbar-brand, .navbar-toggler {
+            font-size: 14px; /* Adjust font size for better alignment */
+        }
+    }
 }
 
-.sidebar .accordion-body .nav-link:hover {
-    color: #0056b3;
-    padding-left: 10px;
-    background-color: #dbe4e7;
-}
-
-/* Active state for sub-items */
-.sidebar .accordion-body .nav-link.active {
-    color: #007bff;
-    background-color: #f0f9ff;
-}
-
-.main-content {
-    margin-left: 250px;
-    padding: 20px;
-}
-
-#content {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
+/* Nav link styling */
+.accordion-body .nav-link {
+    cursor: pointer;
 }
