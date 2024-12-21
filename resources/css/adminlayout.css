@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
 /* Sidebar Styling */
 .sidebar {
     position: fixed;
@@ -9,6 +15,7 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
     z-index: 100; /* Sidebar is below the navbar */
+    font-family: 'Poppins', sans-serif;
 }
 
 .sidebar.collapsed {
@@ -21,6 +28,7 @@
     margin-left: 250px;
     transition: margin-left 0.3s ease-in-out;
     padding-top: 56px; /* Ensure content doesn't get hidden under the navbar */
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Adjust content margin when sidebar is collapsed */
@@ -36,6 +44,7 @@ nav.navbar {
     width: 100%;
     z-index: 1050; /* Ensure navbar is above the sidebar */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow below the navbar */
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Adjustments for mobile and smaller devices */

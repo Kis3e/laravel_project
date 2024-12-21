@@ -7,6 +7,8 @@
     <title>{{ config('app.name') }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ asset('logo.png') }}" type="image/png">
     @vite('resources/css/dashboard.css')
     @vite('resources/css/adminlayout.css')
 </head>
@@ -19,22 +21,49 @@
             <button id="toggleSidebar" class="btn btn-light me-2">
                 <i class="bi bi-list"></i>
             </button>
-            <a class="navbar-brand fw-bold" href="#">{{ config('app.name') }}</a>
+
+            <div class="d-flex align-items-center ms-3">
+                <img src="{{ asset('images/logo.png') }}" alt="Company Logo" style="height: 40px; width: auto;">
+            </div>
+
+            <a class="navbar-brand fw-bold" href="{{ route('equipment.index') }}">{{ config('app.name') }}</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                            @csrf
-                            <button type="submit" class="nav-link btn btn-link">Log out</button>
-                        </form>
+                        <!-- Log Out Button Triggering Modal -->
+                        <button type="button" class="nav-link btn btn-link" data-bs-toggle="modal"
+                            data-bs-target="#logoutModal">Log out</button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <!-- Modal for Log Out Confirmation -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Confirm Log Out</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to log out?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Log Out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Layout: Sidebar + Content -->
     <div class="main-content">
@@ -71,17 +100,24 @@
                                 Equipments
                             </button>
                         </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse">
+                        <div id="collapseTwo" class="accordion-collapse">
                             <div class="accordion-body">
                                 <ul class="list-unstyled">
-                                    <li><a href="{{ route('equipment.index') }}" class="nav-link">Equipment List</a>
+                                    <li>
+                                        <a href="{{ route('equipment.index') }}"
+                                            class="nav-link {{ Request::routeIs('equipment.index') ? 'active' : '' }}">Equipment
+                                            List</a>
                                     </li>
-                                    <li><a href="{{ route('equipment.create') }}" class="nav-link">Add Equipment</a>
+                                    <li>
+                                        <a href="{{ route('equipment.create') }}"
+                                            class="nav-link {{ Request::routeIs('equipment.create') ? 'active' : '' }}">Add
+                                            Equipment</a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
 
                     <!-- Drivers -->
                     <div class="accordion-item">
@@ -156,18 +192,6 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const sidebar = document.getElementById('sidebar');
-            const toggleSidebar = document.getElementById('toggleSidebar');
-            const mainContent = document.querySelector('.main-content');
-
-            toggleSidebar.addEventListener('click', function() {
-                sidebar.classList.toggle('collapsed');
-                mainContent.classList.toggle('sidebar-collapsed');
-            });
-        });
-    </script>
 </body>
 
 </html>

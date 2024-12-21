@@ -2,12 +2,31 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1>Add Equipment</h1>
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mt-2">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('equipment.index') }}">Equipment</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('equipment.index') }}">Equipment List</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Add Equipment</li>
+            </ol>
+        </nav>
+
+        <!-- Page Title -->
+        <h1 class="mt-2 text-start">Add Equipment</h1>
+
+        <!-- Go Back Button -->
+        <a href="{{ url()->previous() }}" class="btn btn-sm btn-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Go Back
+        </a>
     </div>
 
     {{-- Add Equipment Form --}}
     <div class="container-fluid">
-        <div class="card shadow-sm mt-5">
+        <div class="card shadow-sm mt-2">
             <div class="card-body">
                 <form action="{{ route('equipment.store') }}" method="post" enctype="multipart/form-data">
                     @csrf <!-- CSRF Token for security -->
@@ -65,10 +84,12 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-6">
+
+                    {{-- <!-- Upload Image -->
+                    <div class="col-md-6 mb-3">
                         <label for="image" class="form-label fw-bold">Upload Image</label>
                         <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                    </div>
+                    </div> --}}
 
                     <!-- Submit Button -->
                     <div class="mb-3 text-end">
