@@ -17,16 +17,14 @@
 
     <!-- Top Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <div class="container-fluid">
-            <button id="toggleSidebar" class="btn btn-light me-2">
-                <i class="bi bi-list"></i>
-            </button>
-
-            <div class="d-flex align-items-center ms-3">
-                <img src="{{ asset('images/logo.png') }}" alt="Company Logo" style="height: 40px; width: auto;">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+                <button id="toggleSidebar" class="btn btn-light me-2">
+                    <i class="bi bi-list"></i>
+                </button>
+                <img src="{{ asset('images/logo.png') }}" class="d-none d-sm-block" alt="Logo" style="height: 40px; width: auto;">
+                <a class="navbar-brand fw-bold" href="{{ route('equipment.index') }}">{{ config('app.name') }}</a>
             </div>
-
-            <a class="navbar-brand fw-bold" href="{{ route('equipment.index') }}">{{ config('app.name') }}</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                 <span class="navbar-toggler-icon"></span>
@@ -34,9 +32,10 @@
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <!-- Log Out Button Triggering Modal -->
-                        <button type="button" class="nav-link btn btn-link" data-bs-toggle="modal"
-                            data-bs-target="#logoutModal">Log out</button>
+                        <button type="button" class="nav-link btn btn-danger btn-sm d-flex align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#logoutModal">
+                            <i class="bi bi-box-arrow-right me-2"></i> Log Out
+                        </button>
                     </li>
                 </ul>
             </div>
@@ -66,7 +65,7 @@
     </div>
 
     <!-- Main Layout: Sidebar + Content -->
-    <div class="main-content">
+    <div class="main-content d-flex">
         <!-- Sidebar -->
         <nav id="sidebar" class="sidebar">
             <div class="p-3">
@@ -192,6 +191,19 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggleButton = document.getElementById('toggleSidebar');
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+    
+            toggleButton.addEventListener('click', function () {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('sidebar-collapsed');
+            });
+        });
+    </script>
+    
 </body>
 
 </html>

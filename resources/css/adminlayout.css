@@ -1,21 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
-/* Sidebar Styling */
 .sidebar {
     position: fixed;
-    top: 56px; /* Adjust this value to match the height of the navbar */
+    top: 56px;
     left: 0;
-    height: calc(100% - 56px); /* Ensure the sidebar takes up the remaining space below the navbar */
+    height: calc(100% - 56px);
     width: 250px;
     background-color: #f8f9fa;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease-in-out;
-    z-index: 100; /* Sidebar is below the navbar */
-    font-family: 'Poppins', sans-serif;
+    z-index: 100;
+    font-family: "Poppins", sans-serif;
 }
 
 .sidebar.collapsed {
@@ -27,13 +26,14 @@ body {
     display: flex;
     margin-left: 250px;
     transition: margin-left 0.3s ease-in-out;
-    padding-top: 56px; /* Ensure content doesn't get hidden under the navbar */
-    font-family: 'Poppins', sans-serif;
+    padding-top: 56px;
+    font-family: "Poppins", sans-serif;
+    width: calc(100% - 250px);
 }
 
-/* Adjust content margin when sidebar is collapsed */
 .main-content.sidebar-collapsed {
     margin-left: 0;
+    width: 100%;
 }
 
 /* Navbar */
@@ -42,65 +42,60 @@ nav.navbar {
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1050; /* Ensure navbar is above the sidebar */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow below the navbar */
-    font-family: 'Poppins', sans-serif;
+    z-index: 1050;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: "Poppins", sans-serif;
 }
 
-/* Adjustments for mobile and smaller devices */
 @media (max-width: 991px) {
-    /* Ensure sidebar and content adjust appropriately on small screens */
     #sidebar.collapsed {
         display: none;
     }
 
     .main-content.sidebar-collapsed {
         margin-left: 0;
+        width: 100%;
     }
 
-    /* Ensure navbar items don't stack on each other on small devices */
     .navbar-nav {
-        flex-direction: row; /* Align items horizontally */
+        flex-direction: row;
         align-items: center;
     }
 
     .navbar-nav .nav-item {
-        margin-left: 10px; /* Space between nav items */
+        margin-left: 10px;
     }
 
-    /* Ensure the navbar items (app name, buttons) stay aligned on small screens */
     .navbar-toggler {
-        margin-left: auto; /* Push logout button to the right */
+        margin-left: auto;
     }
 
-    /* Ensure the logout button doesn’t stack with the other navbar items */
-    .navbar-toggler, .navbar-nav .nav-item {
-        display: inline-block; /* Make sure they're in-line */
+    .navbar-toggler,
+    .navbar-nav .nav-item {
+        display: inline-block;
     }
 
-    /* Adjust for screens smaller than 576px (iPhone SE and similar devices) */
-    @media (max-width: 575px) { /* Target smaller screens like iPhone SE */
+    @media (max-width: 575px) {
         .navbar-nav {
-            flex-direction: row; /* Align items horizontally */
-            justify-content: space-between; /* Spread out the items */
+            flex-direction: row;
+            justify-content: space-between;
         }
 
         .navbar-nav .nav-item {
-            margin: 0 5px; /* Reduce margin for tighter layout */
+            margin: 0 5px;
         }
 
         .navbar-toggler {
-            order: 2; /* Ensure the toggle button is on the right */
+            order: 2;
         }
 
-        /* Ensure the navbar items stay aligned without stacking */
-        .navbar-brand, .navbar-toggler {
-            font-size: 14px; /* Adjust font size for better alignment */
+        .navbar-brand,
+        .navbar-toggler {
+            font-size: 14px;
         }
     }
 }
 
-/* Nav link styling */
 .accordion-body .nav-link {
     cursor: pointer;
 }

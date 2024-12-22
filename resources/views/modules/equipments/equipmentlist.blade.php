@@ -20,8 +20,13 @@
             <i class="bi bi-plus-circle"></i> Add Equipment
         </a>
 
-        <!-- Table -->
-        <div class="table-responsive">
+        <!-- Toggle Button for List/Card View -->
+        <button id="toggleView" class="btn btn-secondary mb-3">
+            <i class="bi bi-view-list"></i> Switch to Card View
+        </button>
+
+        <!-- Table View -->
+        <div id="tableView" class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
@@ -55,48 +60,19 @@
                                     @else
                                         bg-secondary
                                     @endif
-                                ">
-                                    {{ $equipment->status }}
-                                </span>
+                                ">{{ $equipment->status }}</span>
                             </td>
 
                             <td class="d-flex align-items-center">
-                                <!-- Edit Button -->
                                 <a href="{{ route('equipment.edit', ['equipment' => $equipment]) }}" class="btn btn-sm btn-primary me-2">
                                     <i class="bi bi-pencil-fill"></i> Edit
                                 </a>
-
-                                <!-- Delete Button (Triggers Modal) -->
                                 <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $equipment->id }}">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </button>
-
-                                <!-- Delete Confirmation Modal -->
-                                <div class="modal fade" id="deleteModal{{ $equipment->id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ $equipment->id }}" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="deleteModalLabel{{ $equipment->id }}">Confirm Delete</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                Are you sure you want to delete the equipment: <strong>{{ $equipment->equipment_name }}</strong>?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                <form action="{{ route('equipment.delete', ['equipment' => $equipment]) }}" method="post" class="d-inline">
-                                                    @csrf
-                                                    @method('delete')
-                                                    <button type="submit" class="btn btn-danger">Confirm Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
 
                             <td>
-                                <!-- See More Button -->
                                 <a href="{{ route('equipment.showDetail', ['equipment' => $equipment]) }}" class="btn btn-sm btn-secondary me-2">
                                     <i class="bi bi-eye-fill"></i> See More
                                 </a>
@@ -106,5 +82,55 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Card View (Initially Hidden) -->
+        <div id="cardView" class="row row-cols-1 row-cols-md-3 g-4" style="display: none;">
+            @foreach ($equipments as $equipment)
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="{{ $equipment->image_url }}" class="card-img-top" alt="{{ $equipment->equipment_name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $equipment->equipment_name }}</h5>
+                            <p class="card-text">{{ $equipment->equipment_description }}</p>
+                            <p class="card-text"><strong>Status: </strong>
+                                <span class="badge 
+                                    @if($equipment->status == 'Available') 
+                                        bg-success 
+                                    @elseif($equipment->status == 'In-use') 
+                                        bg-warning 
+                                    @elseif($equipment->status == 'Under-maintenance') 
+                                        bg-danger 
+                                    @else
+                                        bg-secondary
+                                    @endif
+                                ">{{ $equipment->status }}</span>
+                            </p>
+                            <a href="{{ route('equipment.showDetail', ['equipment' => $equipment]) }}" class="btn btn-secondary">
+                                <i class="bi bi-eye-fill"></i> See More
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
+
+    <!-- JavaScript for toggling views -->
+    <script>
+        document.getElementById('toggleView').addEventListener('click', function() {
+            var tableView = document.getElementById('tableView');
+            var cardView = document.getElementById('cardView');
+            var toggleButton = document.getElementById('toggleView');
+
+            if (tableView.style.display === 'none') {
+                tableView.style.display = 'block';
+                cardView.style.display = 'none';
+                toggleButton.innerHTML = '<i class="bi bi-view-list"></i> Switch to Card View';
+            } else {
+                tableView.style.display = 'none';
+                cardView.style.display = 'block';
+                toggleButton.innerHTML = '<i class="bi bi-grid"></i> Switch to List View';
+            }
+        });
+    </script>
 @endsection
