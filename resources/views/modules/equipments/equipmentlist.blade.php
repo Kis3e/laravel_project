@@ -50,30 +50,32 @@
                             <td>{{ $equipment->date_purchased }}</td>
                             <td>{{ $equipment->equipment_description }}</td>
                             <td>
-                                <span class="badge 
-                                    @if($equipment->status == 'Available') 
-                                        bg-success 
+                                <span
+                                    class="badge 
+                                    @if ($equipment->status == 'Available') bg-success 
                                     @elseif($equipment->status == 'In-use') 
                                         bg-warning 
                                     @elseif($equipment->status == 'Under-maintenance') 
                                         bg-danger 
                                     @else
-                                        bg-secondary
-                                    @endif
+                                        bg-secondary @endif
                                 ">{{ $equipment->status }}</span>
                             </td>
 
                             <td class="d-flex align-items-center">
-                                <a href="{{ route('equipment.edit', ['equipment' => $equipment]) }}" class="btn btn-sm btn-primary me-2">
+                                <a href="{{ route('equipment.edit', ['equipment' => $equipment]) }}"
+                                    class="btn btn-sm btn-primary me-2">
                                     <i class="bi bi-pencil-fill"></i> Edit
                                 </a>
-                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $equipment->id }}">
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal{{ $equipment->id }}">
                                     <i class="bi bi-trash-fill"></i> Delete
                                 </button>
                             </td>
 
                             <td>
-                                <a href="{{ route('equipment.showDetail', ['equipment' => $equipment]) }}" class="btn btn-sm btn-secondary me-2">
+                                <a href="{{ route('equipment.showDetail', ['equipment' => $equipment]) }}"
+                                    class="btn btn-sm btn-secondary me-2">
                                     <i class="bi bi-eye-fill"></i> See More
                                 </a>
                             </td>
@@ -83,54 +85,69 @@
             </table>
         </div>
 
-        <!-- Card View (Initially Hidden) -->
-        <div id="cardView" class="row row-cols-1 row-cols-md-3 g-4" style="display: none;">
-            @foreach ($equipments as $equipment)
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="{{ $equipment->image_url }}" class="card-img-top" alt="{{ $equipment->equipment_name }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $equipment->equipment_name }}</h5>
-                            <p class="card-text">{{ $equipment->equipment_description }}</p>
-                            <p class="card-text"><strong>Status: </strong>
-                                <span class="badge 
-                                    @if($equipment->status == 'Available') 
-                                        bg-success 
-                                    @elseif($equipment->status == 'In-use') 
-                                        bg-warning 
-                                    @elseif($equipment->status == 'Under-maintenance') 
-                                        bg-danger 
-                                    @else
-                                        bg-secondary
-                                    @endif
-                                ">{{ $equipment->status }}</span>
-                            </p>
-                            <a href="{{ route('equipment.showDetail', ['equipment' => $equipment]) }}" class="btn btn-secondary">
-                                <i class="bi bi-eye-fill"></i> See More
-                            </a>
-                        </div>
+<!-- Card View (Initially Hidden) -->
+<div id="cardView" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4" style="display: none;">
+    @foreach ($equipments as $equipment)
+        <div class="col">
+            <div class="card shadow-sm">
+                <img src="{{ $equipment->image_url }}" class="card-img-top" alt="{{ $equipment->equipment_name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $equipment->equipment_name }}</h5>
+                    <p class="card-text">{{ $equipment->equipment_description }}</p>
+                    <p class="card-text"><strong>Status: </strong>
+                        <span
+                            class="badge 
+                            @if ($equipment->status == 'Available') bg-success 
+                            @elseif($equipment->status == 'In-use') 
+                                bg-warning 
+                            @elseif($equipment->status == 'Under-maintenance') 
+                                bg-danger 
+                            @else
+                                bg-secondary @endif
+                        ">{{ $equipment->status }}</span>
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-start gap-2">
+                        <!-- Edit Button -->
+                        <a href="{{ route('equipment.edit', ['equipment' => $equipment]) }}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-pencil-fill"></i> Edit
+                        </a>
+
+                        <!-- Delete Button (Modal Trigger) -->
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $equipment->id }}">
+                            <i class="bi bi-trash-fill"></i> Delete
+                        </button>
+
+                        <!-- See More Button -->
+                        <a href="{{ route('equipment.showDetail', ['equipment' => $equipment]) }}" class="btn btn-secondary btn-sm">
+                            <i class="bi bi-eye-fill"></i> See More
+                        </a>
                     </div>
                 </div>
-            @endforeach
+            </div>
         </div>
-    </div>
+    @endforeach
+</div>
 
-    <!-- JavaScript for toggling views -->
-    <script>
-        document.getElementById('toggleView').addEventListener('click', function() {
-            var tableView = document.getElementById('tableView');
-            var cardView = document.getElementById('cardView');
-            var toggleButton = document.getElementById('toggleView');
 
-            if (tableView.style.display === 'none') {
-                tableView.style.display = 'block';
-                cardView.style.display = 'none';
-                toggleButton.innerHTML = '<i class="bi bi-view-list"></i> Switch to Card View';
-            } else {
-                tableView.style.display = 'none';
-                cardView.style.display = 'block';
-                toggleButton.innerHTML = '<i class="bi bi-grid"></i> Switch to List View';
-            }
-        });
-    </script>
-@endsection
+
+        <!-- JavaScript for toggling views -->
+        <script>
+            document.getElementById('toggleView').addEventListener('click', function() {
+                var tableView = document.getElementById('tableView');
+                var cardView = document.getElementById('cardView');
+                var toggleButton = document.getElementById('toggleView');
+
+                if (tableView.style.display === 'none') {
+                    tableView.style.display = 'block';
+                    cardView.style.display = 'none';
+                    toggleButton.innerHTML = '<i class="bi bi-view-list"></i> Switch to Card View';
+                } else {
+                    tableView.style.display = 'none';
+                    cardView.style.display = 'block';
+                    toggleButton.innerHTML = '<i class="bi bi-grid"></i> Switch to List View';
+                }
+            });
+        </script>
+    @endsection

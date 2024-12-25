@@ -23,8 +23,9 @@ class EquipmentController extends Controller
     // Store a newly created equipment in the database
     public function store(Request $request)
     {
+        // Validate Inputs with Unique Check
         $data = $request->validate([
-            'serial_number' => 'required|string|max:255',
+            'serial_number' => 'required|string|max:255|unique:equipments,serial_number',
             'equipment_name' => 'required|string|max:255',
             'equipment_price' => 'required|numeric|between:0,9999999999.99',
             'date_purchased' => 'required|date',
@@ -33,16 +34,17 @@ class EquipmentController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
+        // Handle Image Upload
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('equipment_images', 'public');
-            $data['image'] = $imagePath; // Store the image path in the database
+            $data['image'] = $imagePath;
         }
 
-        Equipment::create($data); // Save the new equipment record
+        // Create New Equipment
+        Equipment::create($data);
 
         return redirect()->route('equipment.index')->with('success', 'Equipment added successfully.');
-    } 
-
+    }
 
     // Show the form for editing a specific equipment
     public function edit(Equipment $equipment)
@@ -53,8 +55,9 @@ class EquipmentController extends Controller
     // Update the specified equipment in the database
     public function update(Request $request, Equipment $equipment)
     {
+        // Validate Inputs with Unique Check (Exclude Current Equipment)
         $data = $request->validate([
-            'serial_number' => 'required|string|max:255',
+            'serial_number' => 'required|string|max:255|unique:equipments,serial_number,' . $equipment->id,
             'equipment_name' => 'required|string|max:255',
             'equipment_price' => 'required|numeric|between:0,9999999999.99',
             'date_purchased' => 'required|date',
@@ -63,7 +66,14 @@ class EquipmentController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
         ]);
 
-        $equipment->update($data); // Update the equipment record
+        // Handle Image Upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('equipment_images', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        // Update Equipment Record
+        $equipment->update($data);
 
         return redirect()->route('equipment.index')->with('success', 'Equipment updated successfully.');
     }
