@@ -21,7 +21,7 @@
                     <img src="{{ asset('images/logo.png') }}"
                         class="img-fluid rounded-3 logo" alt="Sample image" />
                 </div>
-                <div class="col-md-8 col-lg-4 col-xl-4 offset-xl-1">
+                <div class="col-md-8 col-lg-4 col-xl-4 offset-xl-1">                    
                     <!-- Login Form -->
                     <form action="{{ route('login.post') }}" method="post">
                         @csrf <!-- CSRF Token for security -->
